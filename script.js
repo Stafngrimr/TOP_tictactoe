@@ -24,6 +24,7 @@ const theHello = createGreeting("Hello there");
 const theHey = createGreeting("Hey, little");
 const theRude = createGreeting("Fuck you");
 
+
 console.log(theHello("Stephen"));
 console.log(theHey("Penny"));
 console.log(theRude("Zoe"));
