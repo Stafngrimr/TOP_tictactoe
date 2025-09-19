@@ -3,6 +3,7 @@ Store the gameboard as an arr inside of an obj
 Players are also stored as obj
 Object to control the flow of the game
 
+NO GLOBAL CODE I SAID!.. not yet
 NO GLOBAL CODE.
 */
 
@@ -29,12 +30,5 @@ console.log(theHello("Stephen"));
 console.log(theHey("Penny"));
 console.log(theRude("Zoe"));
 
-
-function setTheme() {
-    const root = document.documentElement;
-    const newTheme = (root.className === 'green') ? 'blue' : 'green';
-    root.className = newTheme;
-
-    document.querySelector('.theme-name').textContent = newTheme;
-}
-document.querySelector('.theme-toggle').addEventListener('click', setTheme);
+let mama = (3 + 2) - 76 * (1 + 1);
+console.log(mama);
