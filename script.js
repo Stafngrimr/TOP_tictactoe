@@ -29,8 +29,6 @@ console.log(theHello("Stephen"));
 console.log(theHey("Penny"));
 console.log(theRude("Zoe"));
 
-<<<<<<< HEAD
-
 // todo later: function that capitalises each word in the string
 
 let arr = [1, 2, 3, 4, 5];
@@ -94,7 +92,6 @@ btn2.addEventListener("click", alertFunction());
 
 // best example is above example because it's more flexible.
 // Also use named functions in your code. It's just good practice.
-=======
+
 let mama = (3 + 2) - 76 * (1 + 1);
 console.log(mama);
->>>>>>> 2a35e1e53c3bbdc1714c5a95109df0f663a7b761
