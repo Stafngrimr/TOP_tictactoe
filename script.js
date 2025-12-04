@@ -35,6 +35,18 @@ let arr = [1, 2, 3, 4, 5];
 // write sum of tripled evens
 // using map, filter & reduce
 
+function sumOf(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] % 3 === 0) {
+            sum += arr[i] * 3;
+        }
+    }
+    return sum;
+}
+
+console.log(sumOf(arr));
+
 function sumOfTripledEvens(arr) {
     return arr
     .filter((num) => num % 2 === 0)
@@ -71,7 +83,7 @@ youDiv.style.backgroundColor = "pink";
 head1.textContent = "I'm a header inside this div!";
 para1.textContent = "I'm also in this div!";
 
-function alertFunction1() {
+function alertFunction() {
     alert("Hello Bitches!");
 }
 
@@ -88,7 +100,7 @@ btn.onclick = alertFunction();
 // the above is good, but a DOM element can only have one onclick property
 
 const btn2 = document.querySelector("#btn2");
-btn2.addEventListener("click", alertFunction());
+btn2.addEventListener("click", alertFunction2());
 
 // best example is above example because it's more flexible.
 // Also use named functions in your code. It's just good practice.
