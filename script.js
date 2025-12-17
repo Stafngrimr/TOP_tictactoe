@@ -6,61 +6,59 @@ Object to control the flow of the game
 NO GLOBAL CODE I SAID!.. not yet
 NO GLOBAL CODE.
 */
+function createUser (name) {
+    const printName = () => name[0].toUpperCase() + name.slice(1);
+    name = name[0].toUpperCase() + name.slice(1);
+    let level = 0;
+    const getLevel = () => level;
+    const levelUp = () => level++;
 
-function Player(name, marker) {
-    if (!new.target) {
-        throw Error("You didn't use 'new' operator to call this function dumb-dumb!");
-    }
+    let reputation = 0;
+    const getRep = () => reputation;
+    const repUp = () => reputation++;
 
-    this.name = name;
-    this.marker = marker;
-    this.insultMe = function() {
-        console.log("Fuck you, " + name);
-    }
-    this.sayName = function() {
-        console.log(this.name);
-    }
-    this.sayMarker = function() {
-        console.log(this.marker);
-    }
+    return { name, printName, getLevel, levelUp, getRep, repUp };
 }
 
+function createPlayer (name, gameClass) {
+    const { printName, getLevel, levelUp, getRep, repUp } = createUser(name);
 
-const player = new Player('Zoe', 'P');
-const player2 = new Player('Tim', 'W');
-const playerOne = new Player('steve', 'X');
-const playerTwo = new Player('tom', 'O');
+    const discordName = "@" + name;
+    const weapon = "Mighty Axe"
 
-console.log(player.name);
-console.log(playerTwo.name);
-
-player.insultMe();
-playerTwo.insultMe();
-
-playerOne.sayName();
-playerTwo.sayMarker();
-
-
-function Book(name, author, pages, read) {
-    if (!new.target) {
-        throw Error("missing 'new'");
-    }
-
-    this.name = name;
-    this.author = author;
-    this.pages = pages;
-    this.read = false;
-    this.info = function() {
-        let text;
-        if (this.read == false) {
-            text = "not read yet.";
-        } else {
-            text = "have read.";
-        }
-        return (this.name + " by " + this.author + ", " + this.pages + " pages, " + text);
-    }
+    return { name, printName, gameClass, getLevel, levelUp, getRep, repUp, discordName, weapon };
 }
 
-const theHobbit = new Book("The Hobbit", "JRR Tolkien", "295", false);
+function createEnemy (name, type) {
+    const { printName, getLevel, levelUp } = createUser(name);
 
-console.log(theHobbit.info());
+    const weapon = "Festering Rod";
+
+    return { name, printName, type, getLevel, levelUp, weapon };
+}
+
+const stephen = createPlayer("stephen", "warrior");
+const goblin001 = createEnemy("horatio", "goblin");
+
+
+stephen.levelUp();
+stephen.levelUp();
+stephen.levelUp();
+
+console.log(`${stephen.printName()}'s level is ${stephen.getLevel()} and the gobbo's is a measly ${goblin001.getLevel()}.`);
+
+console.log(`Also, ${stephen.name} the ${stephen.gameClass} is holding the ${stephen.weapon}, whilst ${goblin001.name} the ${goblin001.type} is wielding the ${goblin001.weapon}`);
+
+
+goblin001.levelUp();
+goblin001.levelUp();
+goblin001.levelUp();
+stephen.repUp();
+stephen.repUp();
+stephen.repUp();
+stephen.repUp();
+stephen.repUp();
+stephen.repUp();
+
+console.log(goblin001.name);
+console.log(goblin001.printName());
