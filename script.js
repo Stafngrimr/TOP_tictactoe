@@ -1,39 +1,42 @@
 /*
 NO GLOBAL CODE.
 
-TODO:
-- game loop
-- how to use players? Can't use play1.marker in gameBoard it seems..
-
 */
 
 const gameBoard = (function() {
     let arr = [0, 0, 0, 0, 0, 0, 0, 0 ,0]
 
-    function showBoard() {
+    function show() {
         console.log(arr[0], arr[1], arr[2]);
         console.log(arr[3], arr[4], arr[5]);
         console.log(arr[6], arr[7], arr[8]);
         console.log("- - - - -");
     }
 
-    function play1_mark(arrPos) {
+    function mark(player, arrPos) {
         if (arr[arrPos] === 0) {
-            arr[arrPos] = "x";
+            arr[arrPos] = player.marker;
         } else {
             return 1;
         }
     }
 
-    function play2_mark(arrPos) {
-        if (arr[arrPos] === 0) {
-            arr[arrPos] = "o";
+    function check(player) {
+        if (arr[0] === player.marker && arr[1] === player.marker && arr[2] === player.marker
+        || arr[3] === player.marker && arr[4] === player.marker && arr[5] === player.marker
+        || arr[6] === player.marker && arr[7] === player.marker && arr[8] === player.marker
+        || arr[0] === player.marker && arr[3] === player.marker && arr[6] === player.marker
+        || arr[1] === player.marker && arr[4] === player.marker && arr[7] === player.marker
+        || arr[2] === player.marker && arr[5] === player.marker && arr[8] === player.marker
+        || arr[0] === player.marker && arr[4] === player.marker && arr[8] === player.marker
+        || arr[2] === player.marker && arr[4] === player.marker && arr[6] === player.marker) {
+            return true;
         } else {
-            return 1;
+            return false;
         }
     }
 
-    return { showBoard, play1_mark, play2_mark };
+    return { show, mark, check };
 })();
 
 
@@ -41,27 +44,22 @@ function createPlayer(name, marker) {
     return { name, marker }
 }
 
-function checkBoard() {
-    if (gameBoard.arr[0] === "x" && gameBoard.arr[1] === "x" && gameBoard.arr[2] === "x") {
-        return "one";
-    } else if (gameBoard.arr[0] === "o" && gameBoard.arr[1] === "o" && gameBoard.arr[2] === "o"
-    || gameBoard.arr[3] === "o" && gameBoard.arr[4] === "o" && gameBoard.arr[5] === "o"
-    || gameBoard.arr[6] === "o" && gameBoard.arr[7] === "o" && gameBoard.arr[8] === "o") {
-        return "two";
-    } else {
-        return 0;
-    }
-}
 
 const game = (function() {
     const play1 = createPlayer("Steve", "x");
     const play2 = createPlayer("Tom", "o");
-    let winner = 0;
+    let winner = "no one";
     
-    console.log("Players " + play1.name + " and " + play2.name + " have entered the arena!");
-    gameBoard.showBoard();
+    console.log("Players " + play1.name + "(" + play1.marker + ") and " + play2.name + "(" + play2.marker + ") have entered the arena!");
+    gameBoard.show();
 
-
+    }
+    
+    if (winner === true) {
+        console.log(play1.name + " wins!");
+    } else {
+        console.log("No winner yet");
+    }
 
 })();
 
