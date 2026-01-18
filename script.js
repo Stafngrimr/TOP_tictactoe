@@ -1,5 +1,6 @@
 /*
-NO GLOBAL CODE.
+
+NO GLOBAL CODE. 
 
 */
 
@@ -30,7 +31,7 @@ const gameBoard = (function() {
         || arr[2] === player.marker && arr[5] === player.marker && arr[8] === player.marker
         || arr[0] === player.marker && arr[4] === player.marker && arr[8] === player.marker
         || arr[2] === player.marker && arr[4] === player.marker && arr[6] === player.marker) {
-            return true;
+            return player;
         } else {
             return false;
         }
@@ -48,15 +49,20 @@ function createPlayer(name, marker) {
 const game = (function() {
     const play1 = createPlayer("Steve", "x");
     const play2 = createPlayer("Tom", "o");
-    let winner = "no one";
+    let winner = false;
     
     console.log("Players " + play1.name + "(" + play1.marker + ") and " + play2.name + "(" + play2.marker + ") have entered the arena!");
     gameBoard.show();
 
+    while (winner === false) {
+        for (let i = 0; i < 9; i++) {
+            
+        }
+        winner = gameBoard.check(play1);
     }
     
-    if (winner === true) {
-        console.log(play1.name + " wins!");
+    if (winner != false) {
+        console.log(winner.name + " wins!");
     } else {
         console.log("No winner yet");
     }
