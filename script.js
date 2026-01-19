@@ -43,7 +43,9 @@ const gameBoard = (function() {
 
 
 function createPlayer(name, marker) {
-    return { name, marker }
+    let display = name + "(" + marker + ")";
+
+    return { name, marker, display }
 }
 
 
@@ -53,15 +55,15 @@ const game = (function() {
     let turn;
     let winner = false;
     
-    console.log("Players " + play1.name + "(" + play1.marker + ") and " + play2.name + "(" + play2.marker + ") have entered the arena!");
+    console.log("Players " + play1.display + " and " + play2.display + " have entered the arena!");
     gameBoard.show();
 
     let roll = Math.floor(Math.random() * 2);
     if (roll === 0) {
-        console.log(play1.name + " will start!");
+        console.log(play1.display + " will start!");
         turn = "play1";
     } else {
-        consol.elog(play2.name + " will start!");
+        console.log(play2.display + " will start!");
         turn = "play2";
     }
 
