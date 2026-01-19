@@ -50,16 +50,18 @@ function createPlayer(name, marker) {
 const game = (function() {
     const play1 = createPlayer("Steve", "x");
     const play2 = createPlayer("Tom", "o");
+    let turn;
     let winner = false;
     
     console.log("Players " + play1.name + "(" + play1.marker + ") and " + play2.name + "(" + play2.marker + ") have entered the arena!");
     gameBoard.show();
 
-    let turn;
     let roll = Math.floor(Math.random() * 2);
     if (roll === 0) {
+        console.log(play1.name + " will start!");
         turn = "play1";
     } else {
+        consol.elog(play2.name + " will start!");
         turn = "play2";
     }
 
