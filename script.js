@@ -17,6 +17,7 @@ const gameBoard = (function() {
     function mark(player, arrPos) {
         if (arr[arrPos] === 0) {
             arr[arrPos] = player.marker;
+            return 0;
         } else {
             return 1;
         }
@@ -54,12 +55,23 @@ const game = (function() {
     console.log("Players " + play1.name + "(" + play1.marker + ") and " + play2.name + "(" + play2.marker + ") have entered the arena!");
     gameBoard.show();
 
+    let turn;
+    let roll = Math.floor(Math.random() * 2);
+    if (roll === 0) {
+        turn = "play1";
+    } else {
+        turn = "play2";
+    }
+
+
+/*
     while (winner === false) {
         for (let i = 0; i < 9; i++) {
             
         }
         winner = gameBoard.check(play1);
     }
+*/
     
     if (winner != false) {
         console.log(winner.name + " wins!");
