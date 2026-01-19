@@ -15,7 +15,7 @@ const gameBoard = (function() {
     }
 
     function mark(player, arrPos) {
-        if (arr[arrPos] === 0) {
+        if (arr[arrPos] === 0 && arrPos != NaN && arrPos.length === 1) {
             arr[arrPos] = player.marker;
             return 0;
         } else {
@@ -53,35 +53,48 @@ const game = (function() {
     const play1 = createPlayer("Steve", "x");
     const play2 = createPlayer("Tom", "o");
     let turn;
+    let validity;
     let winner = false;
     
+    // get the crowd going
     console.log("Players " + play1.display + " and " + play2.display + " have entered the arena!");
     gameBoard.show();
 
+    // determining who goes first
     let roll = Math.floor(Math.random() * 2);
     if (roll === 0) {
         console.log(play1.display + " will start!");
-        turn = "play1";
+        turn = play1;
     } else {
         console.log(play2.display + " will start!");
-        turn = "play2";
+        turn = play2;
     }
 
+    // actual game loop
+    for (let i = 0; i < 9; i++) {
+        do {
+            let move = prompt(turn.name + ", your move");
+            validity = gameBoard.mark(turn, move);
+        } while (validity === 1);
 
-/*
-    while (winner === false) {
-        for (let i = 0; i < 9; i++) {
-            
+        gameBoard.show();
+
+        winner = gameBoard.check(turn);
+        if (winner === false) {
+            if (turn === play1) {
+                turn = play2;
+            } else {
+                turn = play1;
+            }
+        } else {
+            break;
         }
-        winner = gameBoard.check(play1);
     }
-*/
     
-    if (winner != false) {
-        console.log(winner.name + " wins!");
+    if (winner === false) {
+        console.log("I'm afraid it's a draw folks!");
     } else {
-        console.log("No winner yet");
+        console.log(turn.name + " is the winner!");
     }
-
 })();
 
