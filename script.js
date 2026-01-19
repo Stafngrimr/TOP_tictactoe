@@ -97,4 +97,3 @@ const game = (function() {
         console.log(turn.name + " is the winner!");
     }
 })();
-
