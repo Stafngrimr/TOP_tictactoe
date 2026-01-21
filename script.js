@@ -4,15 +4,12 @@ NO GLOBAL CODE.
 
 */
 
+const domManip = (function() {
+
+})();
+
 const gameBoard = (function() {
     let arr = [0, 0, 0, 0, 0, 0, 0, 0 ,0]
-
-    function show() {
-        console.log(arr[0], arr[1], arr[2]);
-        console.log(arr[3], arr[4], arr[5]);
-        console.log(arr[6], arr[7], arr[8]);
-        console.log("- - - - -");
-    }
 
     function mark(player, arrPos) {
         if (arr[arrPos] === 0 && arrPos != NaN && arrPos.length === 1) {
@@ -38,7 +35,7 @@ const gameBoard = (function() {
         }
     }
 
-    return { show, mark, check };
+    return { mark, check };
 })();
 
 
@@ -56,17 +53,11 @@ const game = (function() {
     let validity;
     let winner = false;
     
-    // get the crowd going
-    console.log("Players " + play1.display + " and " + play2.display + " have entered the arena!");
-    gameBoard.show();
-
     // determining who goes first
     let roll = Math.floor(Math.random() * 2);
     if (roll === 0) {
-        console.log(play1.display + " will start!");
         turn = play1;
     } else {
-        console.log(play2.display + " will start!");
         turn = play2;
     }
 
@@ -76,8 +67,6 @@ const game = (function() {
             let move = prompt(turn.name + ", your move");
             validity = gameBoard.mark(turn, move);
         } while (validity === 1);
-
-        gameBoard.show();
 
         winner = gameBoard.check(turn);
         if (winner === false) {
@@ -97,3 +86,4 @@ const game = (function() {
         console.log(turn.name + " is the winner!");
     }
 })();
+
