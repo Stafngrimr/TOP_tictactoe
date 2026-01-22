@@ -85,5 +85,5 @@ const game = (function() {
     } else {
         console.log(turn.name + " is the winner!");
     }
-})();
+});
 
