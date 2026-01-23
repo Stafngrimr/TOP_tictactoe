@@ -23,29 +23,43 @@ body {
 #game {
     color: black;
     background-color: white;
+    border: 2px dotted white;
     width: 366px;
     height: 366px;
+    padding: 3px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
+#left_container,
+#right_container {
+    margin-top: 100px;
+    height: 164px;
+    width: 328px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 2px dotted white;
+}
+
 #left_container {
-    height: 250px;
-    width: 250px;
-    background-color: blue;
     margin-right: 100px;
 }
 
 #right_container {
-    height: 250px;
-    width: 250px;
-    background-color: red;
     margin-left: 100px;
 }
 
 .slot {
     width: 120px;
     height: 120px;
+    border: 1px solid black;
+}
+
+
+.markers {
+    height: 80px;
+    width: 80px;
     border: 1px solid black;
 }
