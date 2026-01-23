@@ -1,7 +1,65 @@
-/* Gaming style */
+/* Pixelated game style -- SUPER NAUGHTS & CROSSES DELUXE! */
+
+html,
+body {
+    margin: 0;
+}
 
 body {
     background-color: #232323;
     font-family: 'Courier New', Courier, monospace;
     color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#main_container {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+}
+
+#game {
+    color: black;
+    background-color: white;
+    border: 2px dotted white;
+    width: 366px;
+    height: 366px;
+    padding: 3px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#left_container,
+#right_container {
+    margin-top: 100px;
+    height: 164px;
+    width: 328px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 2px dotted white;
+}
+
+#left_container {
+    margin-right: 100px;
+}
+
+#right_container {
+    margin-left: 100px;
+}
+
+.slot {
+    width: 120px;
+    height: 120px;
+    border: 1px solid black;
+}
+
+
+.markers {
+    height: 80px;
+    width: 80px;
+    border: 1px solid black;
 }
