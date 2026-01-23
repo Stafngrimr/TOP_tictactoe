@@ -15,7 +15,7 @@ body {
 }
 
 #main_container {
-    margin-top: 50px;
+    margin-top: 100px;
     display: flex;
     flex-direction: row;
 }
@@ -23,8 +23,8 @@ body {
 #game {
     color: black;
     background-color: white;
-    width: 246px;
-    height: 246px;
+    width: 366px;
+    height: 366px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -45,7 +45,7 @@ body {
 }
 
 .slot {
-    width: 80px;
-    height: 80px;
-    border: 1px solid red;
+    width: 120px;
+    height: 120px;
+    border: 1px solid black;
 }
