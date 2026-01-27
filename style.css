@@ -8,6 +8,7 @@ body {
 body {
     background-color: #232323;
     font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5em;
     color: white;
     display: flex;
     flex-direction: column;
@@ -32,6 +33,23 @@ body {
     flex-wrap: wrap;
 }
 
+#status {
+    align-self: center;
+    width: 366px;
+}
+
+#reset_button {
+    width: 366px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#reset {
+    height: 25px;
+    width: 125px;
+}
+
 #left_container,
 #right_container {
     margin-top: 100px;
@@ -49,6 +67,14 @@ body {
 
 #right_container {
     margin-left: 100px;
+}
+
+#o_status,
+#x_status {
+    margin-top: 10px;
+    width: 328px;
+    display: flex;
+    justify-content: center;
 }
 
 .slot {

@@ -5,6 +5,96 @@ NO GLOBAL CODE.
 */
 
 const domManip = (function() {
+    // Player 1 Colours
+    const p1Red = document.querySelector("#play1_red");
+    const p1Pink = document.querySelector("#play1_pink");
+    const p1Purple = document.querySelector("#play1_purple");
+    const p1Teal = document.querySelector("#play1_teal");
+    const p1Green = document.querySelector("#play1_green");
+    const p1Blue = document.querySelector("#play1_blue");
+    const p1Yellow = document.querySelector("#play1_yellow");
+    const p1Orange = document.querySelector("#play1_orange");
+    
+    // player 2 colours
+    const p2Red = document.querySelector("#play2_red");
+    const p2Pink = document.querySelector("#play2_pink");
+    const p2Purple = document.querySelector("#play2_purple");
+    const p2Teal = document.querySelector("#play2_teal");
+    const p2Green = document.querySelector("#play2_green");
+    const p2Blue = document.querySelector("#play2_blue");
+    const p2Yellow = document.querySelector("#play2_yellow");
+    const p2Orange = document.querySelector("#play2_orange");
+
+    const oStatus = document.querySelector("#o_status");
+    const xStatus = document.querySelector("#x_status");
+
+    // colour selection might have to occur via status, so that when NOT selected they go back to their regular colour
+    // Not sure the best way to do that.. add an extra id?
+
+    p1Red.addEventListener("click", () => {
+        oStatus.textContent = "You've selected red";
+        p1Red.src = "img/selected.png";
+    });
+
+    p1Pink.addEventListener("click", () => {
+        oStatus.textContent = "You've selected pink";
+    });
+    
+    p1Purple.addEventListener("click", () => {
+        oStatus.textContent = "You've selected purple";
+    });
+
+    p1Teal.addEventListener("click", () => {
+        oStatus.textContent = "You've selected teal";
+    });
+
+    p1Green.addEventListener("click", () => {
+        oStatus.textContent = "You've selected green";
+    });
+
+    p1Blue.addEventListener("click", () => {
+        oStatus.textContent = "You've selected blue";
+    });
+
+    p1Yellow.addEventListener("click", () => {
+        oStatus.textContent = "You've selected yellow";
+    });
+    
+    p1Orange.addEventListener("click", () => {
+        oStatus.textContent = "You've selected orange";
+    });
+
+    p2Red.addEventListener("click", () => {
+        xStatus.textContent = "You've selected red";
+    });
+
+    p2Pink.addEventListener("click", () => {
+        xStatus.textContent = "You've selected pink";
+    });
+    
+    p2Purple.addEventListener("click", () => {
+        xStatus.textContent = "You've selected purple";
+    });
+
+    p2Teal.addEventListener("click", () => {
+        xStatus.textContent = "You've selected teal";
+    });
+
+    p2Green.addEventListener("click", () => {
+        xStatus.textContent = "You've selected green";
+    });
+
+    p2Blue.addEventListener("click", () => {
+        xStatus.textContent = "You've selected blue";
+    });
+
+    p2Yellow.addEventListener("click", () => {
+        xStatus.textContent = "You've selected yellow";
+    });
+    
+    p2Orange.addEventListener("click", () => {
+        xStatus.textContent = "You've selected orange";
+    });
 
 })();
 
