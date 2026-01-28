@@ -1,9 +1,3 @@
-/*
-
-NO GLOBAL CODE. 
-
-*/
-
 const domManip = (function() {
     // Player 1 Colours
     const p1Red = document.querySelector("#play1_red");
@@ -26,7 +20,8 @@ const domManip = (function() {
     const p2Orange = document.querySelector("#play2_orange");
 
     // select all the markers for p1 & p2 for "selection" purposes
-    const markers = document.querySelectorAll(".markers");
+    const markers1 = document.querySelectorAll(".markers1");
+    const markers2 = document.querySelectorAll(".markers2");
 
     // status selectors
     const gameStatus = document.querySelector("#status");
@@ -35,15 +30,21 @@ const domManip = (function() {
 
     const reset = document.querySelector("button");
 
-    console.log(markers);
+    /*
+        you havn't worked this out yet.
+        clue: data-color can spit out 
+    */
 
-    // you havn't worked this out yet.
-    // colour selection might have to occur via status, so that when NOT selected they go back to their regular colour
-    // Not sure the best way to do that.. add an extra id?
-    markers.forEach((color) => {
+    markers1.forEach((color) => {
+        color.addEventListener("click", () => {
+            const file = "img/" + color.dataset.color + "_marker.png";
+         //   if (color.src === "..... -- you're tired. THis was going somewhere though.
+        }
+    )});
+
+    markers2.forEach((color) => {
         color.addEventListener("click", () => {
             console.log(color.dataset.color);
-            color.src= "img/selected.png";
         }
     )});
 
