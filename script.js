@@ -25,15 +25,31 @@ const domManip = (function() {
     const p2Yellow = document.querySelector("#play2_yellow");
     const p2Orange = document.querySelector("#play2_orange");
 
+    // select all the markers for p1 & p2 for "selection" purposes
+    const markers = document.querySelectorAll(".markers");
+
+    // status selectors
+    const gameStatus = document.querySelector("#status");
     const oStatus = document.querySelector("#o_status");
     const xStatus = document.querySelector("#x_status");
 
+    const reset = document.querySelector("button");
+
+    console.log(markers);
+
+    // you havn't worked this out yet.
     // colour selection might have to occur via status, so that when NOT selected they go back to their regular colour
     // Not sure the best way to do that.. add an extra id?
+    markers.forEach((color) => {
+        color.addEventListener("click", () => {
+            console.log(color.dataset.color);
+            color.src= "img/selected.png";
+        }
+    )});
+
 
     p1Red.addEventListener("click", () => {
         oStatus.textContent = "You've selected red";
-        p1Red.src = "img/selected.png";
     });
 
     p1Pink.addEventListener("click", () => {
