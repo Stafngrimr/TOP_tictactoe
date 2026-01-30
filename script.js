@@ -32,87 +32,44 @@ const domManip = (function() {
 
     /*
         you havn't worked this out yet.
-        clue: data-color can spit out 
+        clue: data-color can spit out colours to attach to var
     */
 
     markers1.forEach((color) => {
         color.addEventListener("click", () => {
             const file = "img/" + color.dataset.color + "_marker.png";
-         //   if (color.src === "..... -- you're tired. THis was going somewhere though.
+            console.log(file);
+            oStatus.textContent = "You've selected " + color.dataset.color;
+            color.classList.toggle("selected");
+
+            let elem = color.parentNode.firstChild;
+            console.log(color.parentNode);
+            console.log(color);
+            console.log(elem);
+
+
+            for (let i=0;i<8;i++) {
+                if (elem.dataset.color === color.dataset.color) {
+                    continue;
+                } else {
+                    if (elem.classList.contains("selected") === true) {
+                        elem.classList.toggle("selected");
+                    }
+                }
+                // should we cycle through colors this way? if we can't hit the "next sibling" then go to first?
+                elem = elem.nextSibling;
+            }
         }
     )});
 
     markers2.forEach((color) => {
         color.addEventListener("click", () => {
-            console.log(color.dataset.color);
+            const file = "img/" + color.dataset.color + "_marker.png";
+            console.log(file);
+            xStatus.textContent = "You've selected " + color.dataset.color;
         }
     )});
-
-
-    p1Red.addEventListener("click", () => {
-        oStatus.textContent = "You've selected red";
-    });
-
-    p1Pink.addEventListener("click", () => {
-        oStatus.textContent = "You've selected pink";
-    });
     
-    p1Purple.addEventListener("click", () => {
-        oStatus.textContent = "You've selected purple";
-    });
-
-    p1Teal.addEventListener("click", () => {
-        oStatus.textContent = "You've selected teal";
-    });
-
-    p1Green.addEventListener("click", () => {
-        oStatus.textContent = "You've selected green";
-    });
-
-    p1Blue.addEventListener("click", () => {
-        oStatus.textContent = "You've selected blue";
-    });
-
-    p1Yellow.addEventListener("click", () => {
-        oStatus.textContent = "You've selected yellow";
-    });
-    
-    p1Orange.addEventListener("click", () => {
-        oStatus.textContent = "You've selected orange";
-    });
-
-    p2Red.addEventListener("click", () => {
-        xStatus.textContent = "You've selected red";
-    });
-
-    p2Pink.addEventListener("click", () => {
-        xStatus.textContent = "You've selected pink";
-    });
-    
-    p2Purple.addEventListener("click", () => {
-        xStatus.textContent = "You've selected purple";
-    });
-
-    p2Teal.addEventListener("click", () => {
-        xStatus.textContent = "You've selected teal";
-    });
-
-    p2Green.addEventListener("click", () => {
-        xStatus.textContent = "You've selected green";
-    });
-
-    p2Blue.addEventListener("click", () => {
-        xStatus.textContent = "You've selected blue";
-    });
-
-    p2Yellow.addEventListener("click", () => {
-        xStatus.textContent = "You've selected yellow";
-    });
-    
-    p2Orange.addEventListener("click", () => {
-        xStatus.textContent = "You've selected orange";
-    });
-
 })();
 
 const gameBoard = (function() {
