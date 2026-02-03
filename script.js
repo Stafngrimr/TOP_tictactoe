@@ -1,23 +1,23 @@
 const domManip = (function() {
     // Player 1 Colours
-    const p1Red = document.querySelector("#play1_red");
-    const p1Pink = document.querySelector("#play1_pink");
-    const p1Purple = document.querySelector("#play1_purple");
-    const p1Teal = document.querySelector("#play1_teal");
-    const p1Green = document.querySelector("#play1_green");
-    const p1Blue = document.querySelector("#play1_blue");
-    const p1Yellow = document.querySelector("#play1_yellow");
-    const p1Orange = document.querySelector("#play1_orange");
+    const p1Red = document.querySelector("#playo_red");
+    const p1Pink = document.querySelector("#playo_pink");
+    const p1Purple = document.querySelector("#playo_purple");
+    const p1Teal = document.querySelector("#playo_teal");
+    const p1Green = document.querySelector("#playo_green");
+    const p1Blue = document.querySelector("#playo_blue");
+    const p1Yellow = document.querySelector("#playo_yellow");
+    const p1Orange = document.querySelector("#playo_orange");
     
     // player 2 colours
-    const p2Red = document.querySelector("#play2_red");
-    const p2Pink = document.querySelector("#play2_pink");
-    const p2Purple = document.querySelector("#play2_purple");
-    const p2Teal = document.querySelector("#play2_teal");
-    const p2Green = document.querySelector("#play2_green");
-    const p2Blue = document.querySelector("#play2_blue");
-    const p2Yellow = document.querySelector("#play2_yellow");
-    const p2Orange = document.querySelector("#play2_orange");
+    const p2Red = document.querySelector("#playx_red");
+    const p2Pink = document.querySelector("#playx_pink");
+    const p2Purple = document.querySelector("#playx_purple");
+    const p2Teal = document.querySelector("#playx_teal");
+    const p2Green = document.querySelector("#playx_green");
+    const p2Blue = document.querySelector("#playx_blue");
+    const p2Yellow = document.querySelector("#playx_yellow");
+    const p2Orange = document.querySelector("#playx_orange");
 
     // select all the markers for p1 & p2 for "selection" purposes
     const markers1 = document.querySelectorAll(".markers1");
@@ -43,6 +43,7 @@ const domManip = (function() {
             color.classList.toggle("selected");
 
             let elem = color.parentNode.firstChild;
+            elem = elem.nextSibling;
             console.log(color.parentNode);
             console.log(color);
             console.log(elem);
@@ -71,6 +72,12 @@ const domManip = (function() {
     )});
     
 })();
+
+function createPlayer(name, marker) {
+    let display = name + "(" + marker + ")";
+
+    return { name, marker, display, color }
+}
 
 const gameBoard = (function() {
     let arr = [0, 0, 0, 0, 0, 0, 0, 0 ,0]
@@ -103,16 +110,11 @@ const gameBoard = (function() {
 })();
 
 
-function createPlayer(name, marker) {
-    let display = name + "(" + marker + ")";
-
-    return { name, marker, display }
-}
 
 
 const game = (function() {
-    const play1 = createPlayer("Steve", "x");
-    const play2 = createPlayer("Tom", "o");
+    const playo = createPlayer("Steve", "x");
+    const playx = createPlayer("Tom", "o");
     let turn;
     let validity;
     let winner = false;
@@ -120,9 +122,9 @@ const game = (function() {
     // determining who goes first
     let roll = Math.floor(Math.random() * 2);
     if (roll === 0) {
-        turn = play1;
+        turn = playo;
     } else {
-        turn = play2;
+        turn = playx;
     }
 
     // actual game loop
@@ -134,10 +136,10 @@ const game = (function() {
 
         winner = gameBoard.check(turn);
         if (winner === false) {
-            if (turn === play1) {
-                turn = play2;
+            if (turn === playo) {
+                turn = playx;
             } else {
-                turn = play1;
+                turn = playo;
             }
         } else {
             break;
