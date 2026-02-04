@@ -107,8 +107,8 @@ button#clean {
 }
 
 
-.markers1,
-.markers2 {
+.markers_o,
+.markers_x {
     height: 80px;
     width: 80px;
     border: 1px solid black;

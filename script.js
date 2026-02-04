@@ -1,5 +1,6 @@
-const domManip = (function() {
+const dom = (function() {
     
+    const poRed = document.querySelector("#playx_red");
     const poPink = document.querySelector("#playo_pink");
     const poPurple = document.querySelector("#playo_purple");
     const poTeal = document.querySelector("#playo_teal");
@@ -34,50 +35,13 @@ const domManip = (function() {
 
 })();
 
-const colourPicker = (function() {
-    markers_o.forEach((color) => {
-        color.addEventListener("click", () => {
-            const file = "img/" + color.dataset.color + "_marker.png";
-            console.log(file);
-            oStatus.textContent = "You've selected " + color.dataset.color;
-            color.classList.toggle("selected");
-
-            let elem = color.parentNode.firstChild;
-            elem = elem.nextSibling;
-            console.log(color.parentNode);
-            console.log(color);
-            console.log(elem);
-
-
-            for (let i=0;i<8;i++) {
-                if (elem.dataset.color === color.dataset.color) {
-                    continue;
-                } else {
-                    if (elem.classList.contains("selected") === true) {
-                        elem.classList.toggle("selected");
-                    }
-                }
-                // should we cycle through colors this way? if we can't hit the "next sibling" then go to first?
-                elem = elem.nextSibling;
-            }
-        }
-    )});
-
-    markers_x.forEach((color) => {
-        color.addEventListener("click", () => {
-            const file = "img/" + color.dataset.color + "_marker.png";
-            console.log(file);
-            xStatus.textContent = "You've selected " + color.dataset.color;
-        }
-    )});
-    
-})();
 
 function createPlayer(name, marker) {
     let display = name + "(" + marker + ")";
 
-    return { name, marker, display, color }
+    return { name, marker, display }
 }
+
 
 const gameBoard = (function() {
     let arr = [0, 0, 0, 0, 0, 0, 0, 0 ,0]
@@ -110,6 +74,44 @@ const gameBoard = (function() {
 })();
 
 
+const colourPicker = (function() {
+    dom["markers_o"].forEach((color) => {
+        color.addEventListener("click", () => {
+            const file = "img/" + color.dataset.color + "_marker.png";
+            console.log(file);
+            color.classList.toggle("selected");
+
+            let elem = color.parentNode.firstChild;
+            elem = elem.nextSibling;
+            console.log(color.parentNode);
+            console.log(color);
+            console.log(elem);
+
+
+            for (let i=0;i<8;i++) {
+                if (elem.dataset.color === color.dataset.color) {
+                    continue;
+                } else {
+                    if (elem.classList.contains("selected") === true) {
+                        elem.classList.toggle("selected");
+                    }
+                }
+                // should we cycle through colors this way? if we can't hit the "next sibling" then go to first?
+                elem = elem.nextSibling;
+            }
+        }
+    )});
+
+    dom["markers_x"].forEach((color) => {
+        color.addEventListener("click", () => {
+            const file = "img/" + color.dataset.color + "_marker.png";
+            console.log(file);
+        }
+    )});
+    
+})();
+
+
 const game = (function() {
     const playo = createPlayer("Steve", "o");
     const playx = createPlayer("Tom", "x");
@@ -121,8 +123,12 @@ const game = (function() {
     let roll = Math.floor(Math.random() * 2);
     if (roll === 0) {
         turn = playo;
+        dom["oStatus"].textContent = "Your turn";
+        dom.xStatus.textContent = "";
     } else {
         turn = playx;
+        dom["xStatus"].textContent = "Your turn"
+        dom.oStatus.textContent = "";
     }
 
     // actual game loop
@@ -149,5 +155,5 @@ const game = (function() {
     } else {
         console.log(turn.name + " is the winner!");
     }
-});
+})();
 
