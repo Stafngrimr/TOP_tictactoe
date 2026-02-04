@@ -1,41 +1,41 @@
 const domManip = (function() {
-    // Player 1 Colours
-    const p1Red = document.querySelector("#playo_red");
-    const p1Pink = document.querySelector("#playo_pink");
-    const p1Purple = document.querySelector("#playo_purple");
-    const p1Teal = document.querySelector("#playo_teal");
-    const p1Green = document.querySelector("#playo_green");
-    const p1Blue = document.querySelector("#playo_blue");
-    const p1Yellow = document.querySelector("#playo_yellow");
-    const p1Orange = document.querySelector("#playo_orange");
     
-    // player 2 colours
-    const p2Red = document.querySelector("#playx_red");
-    const p2Pink = document.querySelector("#playx_pink");
-    const p2Purple = document.querySelector("#playx_purple");
-    const p2Teal = document.querySelector("#playx_teal");
-    const p2Green = document.querySelector("#playx_green");
-    const p2Blue = document.querySelector("#playx_blue");
-    const p2Yellow = document.querySelector("#playx_yellow");
-    const p2Orange = document.querySelector("#playx_orange");
+    const poPink = document.querySelector("#playo_pink");
+    const poPurple = document.querySelector("#playo_purple");
+    const poTeal = document.querySelector("#playo_teal");
+    const poGreen = document.querySelector("#playo_green");
+    const poBlue = document.querySelector("#playo_blue");
+    const poYellow = document.querySelector("#playo_yellow");
+    const poOrange = document.querySelector("#playo_orange");
+    
+    const pxRed = document.querySelector("#playx_red");
+    const pxPink = document.querySelector("#playx_pink");
+    const pxPurple = document.querySelector("#playx_purple");
+    const pxTeal = document.querySelector("#playx_teal");
+    const pxGreen = document.querySelector("#playx_green");
+    const pxBlue = document.querySelector("#playx_blue");
+    const pxYellow = document.querySelector("#playx_yellow");
+    const pxOrange = document.querySelector("#playx_orange");
 
     // select all the markers for p1 & p2 for "selection" purposes
-    const markers1 = document.querySelectorAll(".markers1");
-    const markers2 = document.querySelectorAll(".markers2");
+    const markers_o = document.querySelectorAll(".markers_o");
+    const markers_x = document.querySelectorAll(".markers_x");
 
     // status selectors
     const gameStatus = document.querySelector("#status");
     const oStatus = document.querySelector("#o_status");
     const xStatus = document.querySelector("#x_status");
 
-    const reset = document.querySelector("button");
+    // buttons
+    const reset = document.querySelector("#reset");
+    const clean = document.querySelector("#clean");
 
-    /*
-        you havn't worked this out yet.
-        clue: data-color can spit out colours to attach to var
-    */
+    return { poRed, poPink, poPurple, poTeal, poGreen, poBlue, poYellow, poOrange, pxRed, pxPink, pxPurple, pxTeal, pxGreen, pxBlue, pxYellow, pxOrange, markers_o, markers_x, gameStatus, oStatus, xStatus, reset, clean }
 
-    markers1.forEach((color) => {
+})();
+
+const colourPicker = (function() {
+    markers_o.forEach((color) => {
         color.addEventListener("click", () => {
             const file = "img/" + color.dataset.color + "_marker.png";
             console.log(file);
@@ -63,7 +63,7 @@ const domManip = (function() {
         }
     )});
 
-    markers2.forEach((color) => {
+    markers_x.forEach((color) => {
         color.addEventListener("click", () => {
             const file = "img/" + color.dataset.color + "_marker.png";
             console.log(file);
@@ -110,11 +110,9 @@ const gameBoard = (function() {
 })();
 
 
-
-
 const game = (function() {
-    const playo = createPlayer("Steve", "x");
-    const playx = createPlayer("Tom", "o");
+    const playo = createPlayer("Steve", "o");
+    const playx = createPlayer("Tom", "x");
     let turn;
     let validity;
     let winner = false;
