@@ -1,6 +1,19 @@
 const dom = (function() {
-    
-    const poRed = document.querySelector("#playx_red");
+    // gameboard slots
+    const s0 = document.querySelector("#s0");
+    const s1 = document.querySelector("#s1");
+    const s2 = document.querySelector("#s2");
+    const s3 = document.querySelector("#s3");
+    const s4 = document.querySelector("#s4");
+    const s5 = document.querySelector("#s5");
+    const s6 = document.querySelector("#s6");
+    const s7 = document.querySelector("#s7");
+    const s8 = document.querySelector("#s8");
+
+    const slots = document.querySelectorAll(".slots");
+
+    // colour slots
+    const poRed = document.querySelector("#playo_red");
     const poPink = document.querySelector("#playo_pink");
     const poPurple = document.querySelector("#playo_purple");
     const poTeal = document.querySelector("#playo_teal");
@@ -18,11 +31,10 @@ const dom = (function() {
     const pxYellow = document.querySelector("#playx_yellow");
     const pxOrange = document.querySelector("#playx_orange");
 
-    // select all the markers for p1 & p2 for "selection" purposes
     const markers_o = document.querySelectorAll(".markers_o");
     const markers_x = document.querySelectorAll(".markers_x");
 
-    // status selectors
+    // status divs
     const gameStatus = document.querySelector("#status");
     const oStatus = document.querySelector("#o_status");
     const xStatus = document.querySelector("#x_status");
@@ -31,8 +43,7 @@ const dom = (function() {
     const reset = document.querySelector("#reset");
     const clean = document.querySelector("#clean");
 
-    return { poRed, poPink, poPurple, poTeal, poGreen, poBlue, poYellow, poOrange, pxRed, pxPink, pxPurple, pxTeal, pxGreen, pxBlue, pxYellow, pxOrange, markers_o, markers_x, gameStatus, oStatus, xStatus, reset, clean }
-
+    return { s1, s2, s3, s4, s5, s6, s7, s8, slots, poRed, poPink, poPurple, poTeal, poGreen, poBlue, poYellow, poOrange, pxRed, pxPink, pxPurple, pxTeal, pxGreen, pxBlue, pxYellow, pxOrange, markers_o, markers_x, gameStatus, oStatus, xStatus, reset, clean }
 })();
 
 
@@ -49,6 +60,8 @@ const gameBoard = (function() {
     function mark(player, arrPos) {
         if (arr[arrPos] === 0 && arrPos != NaN && arrPos.length === 1) {
             arr[arrPos] = player.marker;
+            let sl = "s" + arrPos;
+            dom[sl].textContent = player.marker;
             return 0;
         } else {
             return 1;
@@ -134,9 +147,14 @@ const game = (function() {
     // actual game loop
     for (let i = 0; i < 9; i++) {
         do {
-            let move = prompt(turn.name + ", your move");
+            let move;
+            dom["slots"].forEach((slot) => {
+                slot.addEventListener("click", () => {
+                    move = slot["id"].slice(1);
+                })
+            })
             validity = gameBoard.mark(turn, move);
-        } while (validity === 1);
+        } while (validity === 1); 
 
         winner = gameBoard.check(turn);
         if (winner === false) {
@@ -146,7 +164,7 @@ const game = (function() {
                 turn = playo;
             }
         } else {
-            break;
+          //  break;
         }
     }
     
