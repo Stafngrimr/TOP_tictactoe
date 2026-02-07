@@ -146,6 +146,7 @@ const game = (function() {
 
     // actual game loop
     for (let i = 0; i < 9; i++) {
+        // TODO: this is breaking the game. This loops doesn't let the page load. Why?
         do {
             let move;
             dom["slots"].forEach((slot) => {
