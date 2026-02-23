@@ -13,37 +13,37 @@ const dom = (function() {
     const slots = document.querySelectorAll(".slots");
 
     // colour slots
-    const poRed = document.querySelector("#playo_red");
-    const poPink = document.querySelector("#playo_pink");
-    const poPurple = document.querySelector("#playo_purple");
-    const poTeal = document.querySelector("#playo_teal");
-    const poGreen = document.querySelector("#playo_green");
-    const poBlue = document.querySelector("#playo_blue");
-    const poYellow = document.querySelector("#playo_yellow");
-    const poOrange = document.querySelector("#playo_orange");
+    const oRed = document.querySelector("#o_red");
+    const oPink = document.querySelector("#o_pink");
+    const oPurple = document.querySelector("#o_purple");
+    const oTeal = document.querySelector("#o_teal");
+    const oGreen = document.querySelector("#o_green");
+    const oBlue = document.querySelector("#o_blue");
+    const oYellow = document.querySelector("#o_yellow");
+    const oOrange = document.querySelector("#o_orange");
     
-    const pxRed = document.querySelector("#playx_red");
-    const pxPink = document.querySelector("#playx_pink");
-    const pxPurple = document.querySelector("#playx_purple");
-    const pxTeal = document.querySelector("#playx_teal");
-    const pxGreen = document.querySelector("#playx_green");
-    const pxBlue = document.querySelector("#playx_blue");
-    const pxYellow = document.querySelector("#playx_yellow");
-    const pxOrange = document.querySelector("#playx_orange");
+    const xRed = document.querySelector("#x_red");
+    const xPink = document.querySelector("#x_pink");
+    const xPurple = document.querySelector("#x_purple");
+    const xTeal = document.querySelector("#x_teal");
+    const xGreen = document.querySelector("#x_green");
+    const xBlue = document.querySelector("#x_blue");
+    const xYellow = document.querySelector("#x_yellow");
+    const xOrange = document.querySelector("#x_orange");
 
-    const markers_o = document.querySelectorAll(".markers_o");
-    const markers_x = document.querySelectorAll(".markers_x");
+    const oMarkers = document.querySelectorAll(".o_markers");
+    const xMarkers = document.querySelectorAll(".o_markers");
 
     // status divs
-    const gameStatus = document.querySelector("#status");
+    const status = document.querySelector("#status");
     const oStatus = document.querySelector("#o_status");
-    const xStatus = document.querySelector("#x_status");
+    const xStatus = document.querySelector("#o_status");
 
     // buttons
     const reset = document.querySelector("#reset");
     const clean = document.querySelector("#clean");
 
-    return { s1, s2, s3, s4, s5, s6, s7, s8, slots, poRed, poPink, poPurple, poTeal, poGreen, poBlue, poYellow, poOrange, pxRed, pxPink, pxPurple, pxTeal, pxGreen, pxBlue, pxYellow, pxOrange, markers_o, markers_x, gameStatus, oStatus, xStatus, reset, clean }
+    return { s0, s1, s2, s3, s4, s5, s6, s7, s8, slots, oRed, oPink, oPurple, oTeal, oGreen, oBlue, oYellow, oOrange, xRed, xPink, xPurple, xTeal, xGreen, xBlue, xYellow, xOrange, oMarkers, xMarkers, status, oStatus, xStatus, reset, clean }
 })();
 
 
