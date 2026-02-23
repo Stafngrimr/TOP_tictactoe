@@ -37,18 +37,19 @@ const dom = (function() {
     // status divs
     const status = document.querySelector("#status");
     const oStatus = document.querySelector("#o_status");
-    const xStatus = document.querySelector("#o_status");
+    const xStatus = document.querySelector("#x_status");
 
     // buttons
     const reset = document.querySelector("#reset");
     const clean = document.querySelector("#clean");
 
-    return { s0, s1, s2, s3, s4, s5, s6, s7, s8, slots, oRed, oPink, oPurple, oTeal, oGreen, oBlue, oYellow, oOrange, xRed, xPink, xPurple, xTeal, xGreen, xBlue, xYellow, xOrange, oMarkers, xMarkers, Status, oStatus, xStatus, reset, clean }
+    return { s0, s1, s2, s3, s4, s5, s6, s7, s8, slots, oRed, oPink, oPurple, oTeal, oGreen, oBlue, oYellow, oOrange, xRed, xPink, xPurple, xTeal, xGreen, xBlue, xYellow, xOrange, oMarkers, xMarkers, status, oStatus, xStatus, reset, clean }
 })();
 
 
 function createPlayer(name, marker) {
     let display = name + "(" + marker + ")";
+
 
     return { name, marker, display }
 }
@@ -58,10 +59,10 @@ const gameBoard = (function() {
     let arr = [0, 0, 0, 0, 0, 0, 0, 0 ,0]
 
     function mark(player, arrPos) {
-        if (arr[arrPos] === 0 && arrPos != NaN && arrPos.length === 1) {
+        if (arr[arrPos] === 0) {
             arr[arrPos] = player.marker;
-            let sl = "s" + arrPos;
-            dom[sl].textContent = player.marker;
+            let slot = "s" + arrPos;
+            dom[slot].textContent = player.marker;
             return 0;
         } else {
             return 1;
@@ -83,12 +84,12 @@ const gameBoard = (function() {
         }
     }
 
-    return { mark, check };
+    return { mark, check, arr };
 })();
 
 
 const colourPicker = (function() {
-    dom["markers_o"].forEach((color) => {
+    dom["oMarkers"].forEach((color) => {
         color.addEventListener("click", () => {
             const file = "img/" + color.dataset.color + "_marker.png";
             console.log(file);
@@ -115,7 +116,7 @@ const colourPicker = (function() {
         }
     )});
 
-    dom["markers_x"].forEach((color) => {
+    dom["xMarkers"].forEach((color) => {
         color.addEventListener("click", () => {
             const file = "img/" + color.dataset.color + "_marker.png";
             console.log(file);
@@ -126,53 +127,63 @@ const colourPicker = (function() {
 
 
 const game = (function() {
-    const playo = createPlayer("Steve", "o");
-    const playx = createPlayer("Tom", "x");
+    const player_o = createPlayer("OH", "o");
+    const player_x = createPlayer("EX", "x");
     let turn;
-    let validity;
-    let winner = false;
+    let count = 0;
     
     // determining who goes first
     let roll = Math.floor(Math.random() * 2);
     if (roll === 0) {
-        turn = playo;
+        turn = player_o;
         dom["oStatus"].textContent = "Your turn";
-        dom.xStatus.textContent = "";
+        dom["xStatus"].textContent = "";
     } else {
-        turn = playx;
+        turn = player_x;
         dom["xStatus"].textContent = "Your turn"
-        dom.oStatus.textContent = "";
+        dom["oStatus"].textContent = "";
+    }
+    
+    // changing turns
+    function changeTurn(turn) {
+        if (turn === player_o) {
+            dom["xStatus"].textContent = "Your turn";
+            dom["oStatus"].textContent = "";
+            return player_x;
+        } else {
+            dom["oStatus"].textContent = "Your turn";
+            dom["xStatus"].textContent = "";
+            return player_o;
+        }
     }
 
     // actual game loop
-//    for (let i = 0; i < 9; i++) {
-//        // TODO: this is breaking the game. This loops doesn't let the page load. Why?
-//        do {
-//            let move;
-//            dom["slots"].forEach((slot) => {
-//                slot.addEventListener("click", () => {
-//                    move = slot["id"].slice(1);
-//                })
-//            })
-//            validity = gameBoard.mark(turn, move);
-//        } while (validity === 1); 
-//
-//        winner = gameBoard.check(turn);
-//        if (winner === false) {
-//            if (turn === playo) {
-//                turn = playx;
-//            } else {
-//                turn = playo;
-//            }
-//        } else {
-//          //  break;
-//        }
-//    }
-    
-    if (winner === false) {
-        console.log("I'm afraid it's a draw folks!");
-    } else {
-        console.log(turn.name + " is the winner!");
+    dom["slots"].forEach((slot) => {
+        slot.addEventListener("click", () => {
+            if (gameBoard.mark(turn, slot["id"].slice(1)) === 0) {
+                if (gameBoard.check(turn) != false) {
+                    if (turn === player_o) {
+                        dom["oStatus"].textContent = "YOU WON!";
+                        dom["xStatus"].textContent = "";
+                        dom["status"].textContent = "Looks like we have a winner!";
+                    } else {
+                        dom["xStatus"].textContent = "YOU WON!";
+                        dom["oStatus"].textContent = "";
+                        dom["status"].textContent = "Looks like we have a winner!";
+                    }
+                } else {
+                    turn = changeTurn(turn);
+                    count++;
+                    console.log(count);
+                }
+            } else {
+                
+            }
+        })
+    })
+
+    if (count === 8) {
+        status.textContent = "This one's a draw, press reset to start again.";
     }
 })();
 
