@@ -107,8 +107,8 @@ button#clean {
 }
 
 
-.markers_o,
-.markers_x {
+.o_markers,
+.x_markers {
     height: 80px;
     width: 80px;
     border: 1px solid black;
@@ -116,4 +116,3 @@ button#clean {
 
 .selected {
     content: url("img/selected.png");
-}

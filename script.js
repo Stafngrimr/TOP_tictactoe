@@ -43,7 +43,7 @@ const dom = (function() {
     const reset = document.querySelector("#reset");
     const clean = document.querySelector("#clean");
 
-    return { s0, s1, s2, s3, s4, s5, s6, s7, s8, slots, oRed, oPink, oPurple, oTeal, oGreen, oBlue, oYellow, oOrange, xRed, xPink, xPurple, xTeal, xGreen, xBlue, xYellow, xOrange, oMarkers, xMarkers, status, oStatus, xStatus, reset, clean }
+    return { s0, s1, s2, s3, s4, s5, s6, s7, s8, slots, oRed, oPink, oPurple, oTeal, oGreen, oBlue, oYellow, oOrange, xRed, xPink, xPurple, xTeal, xGreen, xBlue, xYellow, xOrange, oMarkers, xMarkers, Status, oStatus, xStatus, reset, clean }
 })();
 
 
@@ -145,29 +145,29 @@ const game = (function() {
     }
 
     // actual game loop
-    for (let i = 0; i < 9; i++) {
-        // TODO: this is breaking the game. This loops doesn't let the page load. Why?
-        do {
-            let move;
-            dom["slots"].forEach((slot) => {
-                slot.addEventListener("click", () => {
-                    move = slot["id"].slice(1);
-                })
-            })
-            validity = gameBoard.mark(turn, move);
-        } while (validity === 1); 
-
-        winner = gameBoard.check(turn);
-        if (winner === false) {
-            if (turn === playo) {
-                turn = playx;
-            } else {
-                turn = playo;
-            }
-        } else {
-          //  break;
-        }
-    }
+//    for (let i = 0; i < 9; i++) {
+//        // TODO: this is breaking the game. This loops doesn't let the page load. Why?
+//        do {
+//            let move;
+//            dom["slots"].forEach((slot) => {
+//                slot.addEventListener("click", () => {
+//                    move = slot["id"].slice(1);
+//                })
+//            })
+//            validity = gameBoard.mark(turn, move);
+//        } while (validity === 1); 
+//
+//        winner = gameBoard.check(turn);
+//        if (winner === false) {
+//            if (turn === playo) {
+//                turn = playx;
+//            } else {
+//                turn = playo;
+//            }
+//        } else {
+//          //  break;
+//        }
+//    }
     
     if (winner === false) {
         console.log("I'm afraid it's a draw folks!");
