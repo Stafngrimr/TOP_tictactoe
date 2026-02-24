@@ -11,6 +11,8 @@
 <body>
     <img src="img/title.png" width="700px" alt="title">
     <div id=main_container>
+        <!-- TODO: Redesign logo/scores thing. Do we draw the numbers too? More fun?
+                    If we did them as svgs.. we could change the colours programatically?-->
         <div id="left_container">
             <div id="o_score"><img src="img/o.png" alt="player o logo">
                 <p>- 0</p>
@@ -24,14 +26,12 @@
             <img src="img/yellow_marker.png" id="o_yellow" class="o_markers" data-color="yellow">
             <img src="img/orange_marker.png" id="o_orange" class="o_markers" data-color="orange">
             <div id="o_status"></div>
+            <!-- TODO: Maybe instead of the text, there is a highlighted ring around whosever turn it is? -->
         </div>
 
         <div id="middle-container">
-            <div id="buttons">
-                <button id="reset">RESET</button>
-                <button id="clean">CLEAN</button>
-            </div>
             <div id="game">
+                <!-- TODO: Draw out the markers with colour!-->
                 <div id="s0" class="slots"></div>
                 <div id="s1" class="slots"></div>
                 <div id="s2" class="slots"></div>
@@ -41,6 +41,10 @@
                 <div id="s6" class="slots"></div>
                 <div id="s7" class="slots"></div>
                 <div id="s8" class="slots"></div>
+            </div>
+            <div id="buttons">
+                <button id="reset">RESET</button>
+                <button id="clean">CLEAN</button>
             </div>
             <div id="status">Change your colour or play the game!</div>
         </div>

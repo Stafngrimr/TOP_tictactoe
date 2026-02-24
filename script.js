@@ -134,6 +134,7 @@ const game = (function() {
     const player_o = createPlayer("OH", "o");
     const player_x = createPlayer("EX", "x");
     let turn;
+    // TODO: Doesn't change status when a draw happens.
     let count = 0;
     let winner = false;
     // add the scores in then!
@@ -190,16 +191,17 @@ const game = (function() {
                     }
                 }
             } else {
-                
+                // TODO: Does not say the below when you try and click on an already selected box.
+                if (turn === playero) {
+                    dom["oStatus"].textContent = "Can't go there, try again";
+                } else {
+                    dom["xStatus"].textContent = "Can't go there, try again";
+                }
             }
         })
     });
 
-
     dom["reset"].addEventListener("click", () => {
-        // put the scores back to 0-0
-        // clean the grid to show nothing again
-        // put the array back to all 0s
         dom["slots"].forEach((slot) => {
             slot.textContent = "";
         })
