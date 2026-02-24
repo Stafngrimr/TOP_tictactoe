@@ -1,3 +1,7 @@
+// TODO:
+// Apart from the below..
+// How to change the style of the winning streak on the grid?
+
 const dom = (function() {
     // gameboard slots
     const s0 = document.querySelector("#s0");
@@ -92,6 +96,7 @@ const gameBoard = (function() {
 })();
 
 
+// TODO: Picking your colour does not work AT ALL
 const colourPicker = (function() {
     dom["oMarkers"].forEach((color) => {
         color.addEventListener("click", () => {
