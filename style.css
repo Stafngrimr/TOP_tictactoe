@@ -75,8 +75,8 @@ button#clean {
     margin-left: 100px;
 }
 
-#o_scores,
-#x_scores {
+#o_score,
+#x_score {
     margin-bottom: 10px;
     width: 328px;
     height: 100px;
@@ -87,8 +87,8 @@ button#clean {
     border: 1px solid red;
 }
 
-#x_scores p,
-#o_scores p {
+#x_score p,
+#o_score p {
     margin-left: 10px;
 }
 
@@ -104,6 +104,9 @@ button#clean {
     width: 120px;
     height: 120px;
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 

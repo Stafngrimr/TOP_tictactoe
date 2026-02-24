@@ -9,7 +9,6 @@ const dom = (function() {
     const s6 = document.querySelector("#s6");
     const s7 = document.querySelector("#s7");
     const s8 = document.querySelector("#s8");
-
     const slots = document.querySelectorAll(".slots");
 
     // colour slots
@@ -21,7 +20,6 @@ const dom = (function() {
     const oBlue = document.querySelector("#o_blue");
     const oYellow = document.querySelector("#o_yellow");
     const oOrange = document.querySelector("#o_orange");
-    
     const xRed = document.querySelector("#x_red");
     const xPink = document.querySelector("#x_pink");
     const xPurple = document.querySelector("#x_purple");
@@ -30,9 +28,12 @@ const dom = (function() {
     const xBlue = document.querySelector("#x_blue");
     const xYellow = document.querySelector("#x_yellow");
     const xOrange = document.querySelector("#x_orange");
-
     const oMarkers = document.querySelectorAll(".o_markers");
     const xMarkers = document.querySelectorAll(".o_markers");
+
+    // score divs
+    const oScore = document.querySelector("#o_score");
+    const xScore = document.querySelector("#x_score");
 
     // status divs
     const status = document.querySelector("#status");
@@ -43,20 +44,23 @@ const dom = (function() {
     const reset = document.querySelector("#reset");
     const clean = document.querySelector("#clean");
 
-    return { s0, s1, s2, s3, s4, s5, s6, s7, s8, slots, oRed, oPink, oPurple, oTeal, oGreen, oBlue, oYellow, oOrange, xRed, xPink, xPurple, xTeal, xGreen, xBlue, xYellow, xOrange, oMarkers, xMarkers, status, oStatus, xStatus, reset, clean }
+    return { s0, s1, s2, s3, s4, s5, s6, s7, s8, slots, oRed, oPink, oPurple, oTeal, oGreen, oBlue, oYellow, oOrange, xRed, xPink, xPurple, xTeal, xGreen, xBlue, xYellow, xOrange, oMarkers, xMarkers, oScore, xScore, status, oStatus, xStatus, reset, clean }
 })();
 
 
 function createPlayer(name, marker) {
-    let display = name + "(" + marker + ")";
+    let score = 0;
 
-
-    return { name, marker, display }
+    return { name, marker, score }
 }
 
 
 const gameBoard = (function() {
-    let arr = [0, 0, 0, 0, 0, 0, 0, 0 ,0]
+    let arr = [0, 0, 0, 0, 0, 0, 0, 0 ,0];
+
+    function reset() {
+        arr = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    }
 
     function mark(player, arrPos) {
         if (arr[arrPos] === 0) {
@@ -84,7 +88,7 @@ const gameBoard = (function() {
         }
     }
 
-    return { mark, check, arr };
+    return { mark, check, reset };
 })();
 
 
@@ -131,6 +135,8 @@ const game = (function() {
     const player_x = createPlayer("EX", "x");
     let turn;
     let count = 0;
+    let winner = false;
+    // add the scores in then!
     
     // determining who goes first
     let roll = Math.floor(Math.random() * 2);
@@ -144,7 +150,7 @@ const game = (function() {
         dom["oStatus"].textContent = "";
     }
     
-    // changing turns
+    // function for changing turns
     function changeTurn(turn) {
         if (turn === player_o) {
             dom["xStatus"].textContent = "Your turn";
@@ -165,25 +171,56 @@ const game = (function() {
                     if (turn === player_o) {
                         dom["oStatus"].textContent = "YOU WON!";
                         dom["xStatus"].textContent = "";
-                        dom["status"].textContent = "Looks like we have a winner!";
+                        player_o.score++;
+                        dom["oScore"].textContent = player_o.score;
                     } else {
                         dom["xStatus"].textContent = "YOU WON!";
                         dom["oStatus"].textContent = "";
-                        dom["status"].textContent = "Looks like we have a winner!";
+                        player_x.score++;
+                        dom["xScore"].textContent = player_x.score;
                     }
+                    winner = true;
+                    dom["status"].textContent = "Looks like we have a winner! Press clean to start the next round";
                 } else {
                     turn = changeTurn(turn);
                     count++;
                     console.log(count);
+                    if (count === 9 && winner === false) {
+                        status.textContent = "This one's a draw, press clean to start again.";
+                    }
                 }
             } else {
                 
             }
         })
+    });
+
+
+    dom["reset"].addEventListener("click", () => {
+        // put the scores back to 0-0
+        // clean the grid to show nothing again
+        // put the array back to all 0s
+        dom["slots"].forEach((slot) => {
+            slot.textContent = "";
+        })
+        player_o.score = 0;
+        player_x.score = 0;
+        dom["oScore"].textContent = 0;
+        dom["xScore"].textContent = 0;
+        dom["status"].textContent = "Change your colour or play the game!";
+        gameBoard.reset();
+        count = 0;
+        winner = false;
     })
 
-    if (count === 8) {
-        status.textContent = "This one's a draw, press reset to start again.";
-    }
+    dom["clean"].addEventListener("click", () => {
+        dom["slots"].forEach((slot) => {
+            slot.textContent = "";
+        })
+        gameBoard.reset();
+        count = 0;
+        dom["status"].textContent = "The game begins again!";
+        changeTurn();
+        winner = false;
+    })
 })();
-
