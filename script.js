@@ -196,8 +196,7 @@ const game = (function() {
                     }
                 }
             } else {
-                // TODO: Does not say the below when you try and click on an already selected box.
-                if (turn === playero) {
+                if (turn === player_o) {
                     dom["oStatus"].textContent = "Can't go there, try again";
                 } else {
                     dom["xStatus"].textContent = "Can't go there, try again";
