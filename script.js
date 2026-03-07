@@ -1,5 +1,4 @@
 // TODO:
-// Apart from the below..
 // How to change the style of the winning streak on the grid?
 
 const dom = (function() {
@@ -134,28 +133,11 @@ const colourPicker = (function() {
     
 })();
 
-
-const game = (function() {
+const mech = (function() {
+    // create players
     const player_o = createPlayer("OH", "o");
     const player_x = createPlayer("EX", "x");
-    let turn;
-    // TODO: Doesn't change status when a draw happens.
-    let count = 0;
-    let winner = false;
-    // add the scores in then!
-    
-    // determining who goes first
-    let roll = Math.floor(Math.random() * 2);
-    if (roll === 0) {
-        turn = player_o;
-        dom["oStatus"].textContent = "Your turn";
-        dom["xStatus"].textContent = "";
-    } else {
-        turn = player_x;
-        dom["xStatus"].textContent = "Your turn"
-        dom["oStatus"].textContent = "";
-    }
-    
+
     // function for changing turns
     function changeTurn(turn) {
         if (turn === player_o) {
@@ -168,29 +150,52 @@ const game = (function() {
             return player_o;
         }
     }
+    
+    // function for determining who goes first
+    function rollFirst() {
+        let roll = Math.floor(Math.random() * 2);
+        if (roll === 0) {
+            dom["oStatus"].textContent = "Your turn";
+            dom["xStatus"].textContent = "";
+            return player_o;
+        } else {
+            dom["xStatus"].textContent = "Your turn"
+            dom["oStatus"].textContent = "";
+            return player_x;
+        }
+    }
+    
+    return { player_o, player_x, changeTurn, rollFirst }
+})();
 
-    // actual game loop
+
+
+const game = (function() {
+    // game mechanics vars
+    let turn = mech.rollFirst();
+    let count = 0;
+    let winner = false;
+    
     dom["slots"].forEach((slot) => {
         slot.addEventListener("click", () => {
             if (gameBoard.mark(turn, slot["id"].slice(1)) === 0) {
                 if (gameBoard.check(turn) != false) {
-                    if (turn === player_o) {
+                    if (turn === mech.player_o) {
                         dom["oStatus"].textContent = "YOU WON!";
                         dom["xStatus"].textContent = "";
-                        player_o.score++;
-                        dom["oScore"].textContent = player_o.score;
+                        mech["player_o"].score++;
+                        dom["oScore"].textContent = mech["player_o"].score;
                     } else {
                         dom["xStatus"].textContent = "YOU WON!";
                         dom["oStatus"].textContent = "";
-                        player_x.score++;
-                        dom["xScore"].textContent = player_x.score;
+                        mech["player_x"].score++;
+                        dom["xScore"].textContent = mech["player_x"].score;
                     }
                     winner = true;
                     dom["status"].textContent = "Looks like we have a winner! Press clean to start the next round";
                 } else {
-                    turn = changeTurn(turn);
+                    turn = mech.changeTurn(turn);
                     count++;
-                    console.log(count);
                     if (count === 9 && winner === false) {
                         dom["status"].textContent = "This one's a draw, press clean to start again.";
                         dom["oStatus"].textContent = "";
@@ -198,7 +203,7 @@ const game = (function() {
                     }
                 }
             } else {
-                if (turn === player_o) {
+                if (turn === mech.player_o) {
                     dom["oStatus"].textContent = "Can't go there, try again";
                 } else {
                     dom["xStatus"].textContent = "Can't go there, try again";
@@ -207,18 +212,32 @@ const game = (function() {
         })
     });
 
+    function resetCount()   {
+        count = 0;
+    }
+
+    function resetWinner() {
+        winner = false;
+    }
+
+    return { resetCount, turn, resetWinner }
+
+})();
+
+
+const buttons = (function() {
     dom["reset"].addEventListener("click", () => {
         dom["slots"].forEach((slot) => {
             slot.textContent = "";
         })
-        player_o.score = 0;
-        player_x.score = 0;
-        dom["oScore"].textContent = 0;
-        dom["xScore"].textContent = 0;
+        mech["player_o"].score = 0;
+        mech["player_x"].score = 0;
+        dom["oScore"].textContent = mech["player_o"].score;
+        dom["xScore"].textContent = mech["player_x"].score;
         dom["status"].textContent = "Change your colour or play the game!";
         gameBoard.reset();
-        count = 0;
-        winner = false;
+        game.resetCount();
+        game.resetWinner();
     })
 
     dom["clean"].addEventListener("click", () => {
@@ -226,9 +245,10 @@ const game = (function() {
             slot.textContent = "";
         })
         gameBoard.reset();
-        count = 0;
         dom["status"].textContent = "The game begins again!";
-        changeTurn();
-        winner = false;
+        mech.rollFirst();
+        game.resetCount();
+        game.resetWinner();
     })
-})();
+});
+
