@@ -192,7 +192,9 @@ const game = (function() {
                     count++;
                     console.log(count);
                     if (count === 9 && winner === false) {
-                        status.textContent = "This one's a draw, press clean to start again.";
+                        dom["status"].textContent = "This one's a draw, press clean to start again.";
+                        dom["oStatus"].textContent = "";
+                        dom["xStatus"].textContent = "";
                     }
                 }
             } else {
