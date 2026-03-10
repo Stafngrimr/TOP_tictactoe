@@ -11,29 +11,24 @@
 <body>
     <img src="img/title.png" width="700px" alt="title">
     <div id=main_container>
-        <!-- TODO: Redesign logo/scores thing. Do we draw the numbers too? More fun?
-                    If we did them as svgs.. we could change the colours programatically?-->
         <div id="left_container">
-            <div id="o_score"><img src="img/o.png" alt="player o logo">
-                <p>- 0</p>
+            <div id="o_score">
+                <p>o - 0</p>
             </div>
-            <img src="img/red_marker.png" id="o_red" class="o_markers" data-color="red">
-            <img src="img/pink_marker.png" id="o_pink" class="o_markers" data-color="pink">
-            <img src="img/purple_marker.png" id="o_purple" class="o_markers" data-color="purple">
-            <img src="img/teal_marker.png" id="o_teal" class="o_markers" data-color="teal">
-            <img src="img/green_marker.png" id="o_green" class="o_markers" data-color="green">
-            <img src="img/blue_marker.png" id="o_blue" class="o_markers" data-color="blue">
-            <img src="img/yellow_marker.png" id="o_yellow" class="o_markers" data-color="yellow">
-            <img src="img/orange_marker.png" id="o_orange" class="o_markers" data-color="orange">
-            <div id="o_status"></div>
-            <!-- TODO: Maybe instead of the text, there is a highlighted ring around whosever turn it is?
-                        We only show the turns and the WINNER in this status div. Maybe it can be just the winner? Or maybe we get rid of it completely?
-                        What if all text went on the central status div?-->
+            <div class="colours">
+                <img src="img/red_marker.png" id="o_red" class="o_markers" data-color="red">
+                <img src="img/pink_marker.png" id="o_pink" class="o_markers" data-color="pink">
+                <img src="img/purple_marker.png" id="o_purple" class="o_markers" data-color="purple">
+                <img src="img/teal_marker.png" id="o_teal" class="o_markers" data-color="teal">
+                <img src="img/green_marker.png" id="o_green" class="o_markers" data-color="green">
+                <img src="img/blue_marker.png" id="o_blue" class="o_markers" data-color="blue">
+                <img src="img/yellow_marker.png" id="o_yellow" class="o_markers" data-color="yellow">
+                <img src="img/orange_marker.png" id="o_orange" class="o_markers" data-color="orange">
+            </div>
         </div>
 
         <div id="middle-container">
             <div id="game">
-                <!-- TODO: Draw out the markers with colour!-->
                 <div id="s0" class="slots"></div>
                 <div id="s1" class="slots"></div>
                 <div id="s2" class="slots"></div>
@@ -52,18 +47,19 @@
         </div>
 
         <div id="right_container">
-            <div id="x_score"><img src="img/x.png" alt="player x logo">
-                <p>- 0</p>
+            <div id="x_score">
+                <p>x - 0</p>
             </div>
-            <img src="img/red_marker.png" id="x_red" class="x_markers" data-color="red">
-            <img src="img/pink_marker.png" id="x_pink" class="x_markers" data-color="pink">
-            <img src="img/purple_marker.png" id="x_purple" class="x_markers" data-color="purple">
-            <img src="img/teal_marker.png" id="x_teal" class="x_markers" data-color="teal">
-            <img src="img/green_marker.png" id="x_green" class="x_markers" data-color="green">
-            <img src="img/blue_marker.png" id="x_blue" class="x_markers" data-color="blue">
-            <img src="img/yellow_marker.png" id="x_yellow" class="x_markers" data-color="yellow">
-            <img src="img/orange_marker.png" id="x_orange" class="x_markers" data-color="orange">
-            <div id="x_status"></div>
+            <div class="colours">
+                <img src="img/red_marker.png" id="x_red" class="x_markers" data-color="red">
+                <img src="img/pink_marker.png" id="x_pink" class="x_markers" data-color="pink">
+                <img src="img/purple_marker.png" id="x_purple" class="x_markers" data-color="purple">
+                <img src="img/teal_marker.png" id="x_teal" class="x_markers" data-color="teal">
+                <img src="img/green_marker.png" id="x_green" class="x_markers" data-color="green">
+                <img src="img/blue_marker.png" id="x_blue" class="x_markers" data-color="blue">
+                <img src="img/yellow_marker.png" id="x_yellow" class="x_markers" data-color="yellow">
+                <img src="img/orange_marker.png" id="x_orange" class="x_markers" data-color="orange">
+            </div>
         </div>
     </div>
 </body>

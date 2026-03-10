@@ -40,14 +40,14 @@ const dom = (function() {
 
     // status divs
     const status = document.querySelector("#status");
-    const oStatus = document.querySelector("#o_status");
-    const xStatus = document.querySelector("#x_status");
+    const oTurn = document.querySelector("#left_container");
+    const xTurn = document.querySelector("#right_container");
 
     // buttons
     const reset = document.querySelector("#reset");
     const clean = document.querySelector("#clean");
 
-    return { s0, s1, s2, s3, s4, s5, s6, s7, s8, slots, oRed, oPink, oPurple, oTeal, oGreen, oBlue, oYellow, oOrange, xRed, xPink, xPurple, xTeal, xGreen, xBlue, xYellow, xOrange, oMarkers, xMarkers, oScore, xScore, status, oStatus, xStatus, reset, clean }
+    return { s0, s1, s2, s3, s4, s5, s6, s7, s8, slots, oRed, oPink, oPurple, oTeal, oGreen, oBlue, oYellow, oOrange, xRed, xPink, xPurple, xTeal, xGreen, xBlue, xYellow, xOrange, oMarkers, xMarkers, oScore, xScore, status, oTurn, xTurn, reset, clean }
 })();
 
 
@@ -141,12 +141,12 @@ const mech = (function() {
     // function for changing turns
     function changeTurn(turn) {
         if (turn === player_o) {
-            dom["xStatus"].textContent = "Your turn";
-            dom["oStatus"].textContent = "";
+            dom["xTurn"].style.border = "2px solid green";
+            dom["oTurn"].style.border = "2px solid gray";
             return player_x;
         } else {
-            dom["oStatus"].textContent = "Your turn";
-            dom["xStatus"].textContent = "";
+            dom["oTurn"].style.border = "2px solid green";
+            dom["xTurn"].style.border = "2px solid gray";
             return player_o;
         }
     }
@@ -155,12 +155,12 @@ const mech = (function() {
     function rollFirst() {
         let roll = Math.floor(Math.random() * 2);
         if (roll === 0) {
-            dom["oStatus"].textContent = "Your turn";
-            dom["xStatus"].textContent = "";
+            dom["oTurn"].style.border = "2px solid green";
+            dom["xTurn"].style.border = "2px solid gray";
             return player_o;
         } else {
-            dom["xStatus"].textContent = "Your turn"
-            dom["oStatus"].textContent = "";
+            dom["xTurn"].style.border = "2px solid green";
+            dom["oTurn"].style.border = "2px solid gray";
             return player_x;
         }
     }
@@ -181,15 +181,13 @@ const game = (function() {
             if (gameBoard.mark(turn, slot["id"].slice(1)) === 0) {
                 if (gameBoard.check(turn) != false) {
                     if (turn === mech.player_o) {
-                        dom["oStatus"].textContent = "YOU WON!";
-                        dom["xStatus"].textContent = "";
+                        dom["status"].textContent = "o player won! Press clean to start next round!";
                         mech["player_o"].score++;
-                        dom["oScore"].textContent = mech["player_o"].score;
+                        dom["oScore"].textContent = "o - " + mech["player_o"].score;
                     } else {
-                        dom["xStatus"].textContent = "YOU WON!";
-                        dom["oStatus"].textContent = "";
+                        dom["status"].textContent = "x player won! Press clean to start next round!";
                         mech["player_x"].score++;
-                        dom["xScore"].textContent = mech["player_x"].score;
+                        dom["xScore"].textContent = "x - " + mech["player_x"].score;
                     }
                     winner = true;
                     dom["status"].textContent = "Looks like we have a winner! Press clean to start the next round";
@@ -198,47 +196,28 @@ const game = (function() {
                     count++;
                     if (count === 9 && winner === false) {
                         dom["status"].textContent = "This one's a draw, press clean to start again.";
-                        dom["oStatus"].textContent = "";
-                        dom["xStatus"].textContent = "";
                     }
                 }
             } else {
-                if (turn === mech.player_o) {
-                    dom["oStatus"].textContent = "Can't go there, try again";
-                } else {
-                    dom["xStatus"].textContent = "Can't go there, try again";
-                }
+                dom["status"].textContent = "Can't go there, try again";
             }
         })
     });
 
-    function resetCount()   {
-        count = 0;
-    }
 
-    function resetWinner() {
-        winner = false;
-    }
-
-    return { resetCount, turn, resetWinner }
-
-})();
-
-
-const buttons = (function() {
     dom["reset"].addEventListener("click", () => {
         dom["slots"].forEach((slot) => {
             slot.textContent = "";
         })
         mech["player_o"].score = 0;
         mech["player_x"].score = 0;
-        dom["oScore"].textContent = mech["player_o"].score;
-        dom["xScore"].textContent = mech["player_x"].score;
+        dom["oScore"].textContent = "o - " + mech["player_o"].score;
+        dom["xScore"].textContent = "o - " + mech["player_x"].score;
         dom["status"].textContent = "Change your colour or play the game!";
         gameBoard.reset();
-        game.resetCount();
-        game.resetWinner();
-    })
+        count = 0;
+        winner = false;
+    });
 
     dom["clean"].addEventListener("click", () => {
         dom["slots"].forEach((slot) => {
@@ -247,8 +226,8 @@ const buttons = (function() {
         gameBoard.reset();
         dom["status"].textContent = "The game begins again!";
         mech.rollFirst();
-        game.resetCount();
-        game.resetWinner();
+        count = 0;
+        winner = false;
     })
-});
+})();
 

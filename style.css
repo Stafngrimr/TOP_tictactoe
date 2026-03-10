@@ -59,12 +59,19 @@ button#clean {
 
 #left_container,
 #right_container {
-    height: 164px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+    padding: 5px;
+    border: 1px solid gray;
+}
+
+.colours {
     width: 328px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-top: 60px;
 }
 
 #left_container {
@@ -84,7 +91,6 @@ button#clean {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    border: 1px solid red;
 }
 
 #x_score p,
@@ -101,6 +107,7 @@ button#clean {
 }
 
 .slots {
+    font-size: 4em;
     width: 120px;
     height: 120px;
     border: 1px solid black;
