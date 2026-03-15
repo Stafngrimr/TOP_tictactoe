@@ -1,6 +1,3 @@
-// TODO:
-// How to change the style of the winning streak on the grid?
-
 const dom = (function() {
     // gameboard slots
     const s0 = document.querySelector("#s0");
@@ -77,14 +74,69 @@ const gameBoard = (function() {
     }
 
     function check(player) {
-        if (arr[0] === player.marker && arr[1] === player.marker && arr[2] === player.marker
-        || arr[3] === player.marker && arr[4] === player.marker && arr[5] === player.marker
-        || arr[6] === player.marker && arr[7] === player.marker && arr[8] === player.marker
-        || arr[0] === player.marker && arr[3] === player.marker && arr[6] === player.marker
-        || arr[1] === player.marker && arr[4] === player.marker && arr[7] === player.marker
-        || arr[2] === player.marker && arr[5] === player.marker && arr[8] === player.marker
-        || arr[0] === player.marker && arr[4] === player.marker && arr[8] === player.marker
-        || arr[2] === player.marker && arr[4] === player.marker && arr[6] === player.marker) {
+        if (arr[0] === player.marker && arr[1] === player.marker && arr[2] === player.marker) {
+            s0.style.backgroundColor = "green";
+            s0.style.color = "white";
+            s1.style.backgroundColor = "green";
+            s1.style.color = "white";
+            s2.style.backgroundColor = "green";
+            s2.style.color = "white";
+            return player;
+        } else if (arr[3] === player.marker && arr[4] === player.marker && arr[5] === player.marker) {
+            s3.style.backgroundColor = "green";
+            s3.style.color = "white";
+            s4.style.backgroundColor = "green";
+            s4.style.color = "white";
+            s5.style.backgroundColor = "green";
+            s5.style.color = "white";
+            return player;
+        } else if (arr[6] === player.marker && arr[7] === player.marker && arr[8] === player.marker) {
+            s6.style.backgroundColor = "green";
+            s6.style.color = "white";
+            s7.style.backgroundColor = "green";
+            s7.style.color = "white";
+            s8.style.backgroundColor = "green";
+            s8.style.color = "white";
+            return player;
+        } else if (arr[0] === player.marker && arr[3] === player.marker && arr[6] === player.marker) {
+            s0.style.backgroundColor = "green";
+            s0.style.color = "white";
+            s3.style.backgroundColor = "green";
+            s3.style.color = "white";
+            s6.style.backgroundColor = "green";
+            s6.style.color = "white";
+            return player;
+        } else if (arr[1] === player.marker && arr[4] === player.marker && arr[7] === player.marker) {
+            s1.style.backgroundColor = "green";
+            s1.style.color = "white";
+            s4.style.backgroundColor = "green";
+            s4.style.color = "white";
+            s7.style.backgroundColor = "green";
+            s7.style.color = "white";
+            return player;
+        } else if (arr[2] === player.marker && arr[5] === player.marker && arr[8] === player.marker) {
+            s2.style.backgroundColor = "green";
+            s2.style.color = "white";
+            s5.style.backgroundColor = "green";
+            s5.style.color = "white";
+            s8.style.backgroundColor = "green";
+            s8.style.color = "white";
+            return player;
+        } else if (arr[0] === player.marker && arr[4] === player.marker && arr[8] === player.marker) {
+            s0.style.backgroundColor = "green";
+            s0.style.color = "white";
+            s4.style.backgroundColor = "green";
+            s4.style.color = "white";
+            s8.style.backgroundColor = "green";
+            s8.style.color = "white";
+            return player;
+        } else if (arr[2] === player.marker && arr[4] === player.marker && arr[6] === player.marker) {
+            s2.style.backgroundColor = "green";
+            s2.style.color = "white";
+            s4.style.backgroundColor = "green";
+            s4.style.color = "white";
+            s6.style.backgroundColor = "green";
+            s6.style.color = "white";
             return player;
         } else {
             return false;
@@ -208,6 +260,8 @@ const game = (function() {
     dom["reset"].addEventListener("click", () => {
         dom["slots"].forEach((slot) => {
             slot.textContent = "";
+            slot.style.backgroundColor = "white";
+            slot.style.color = "black";
         })
         mech["player_o"].score = 0;
         mech["player_x"].score = 0;
@@ -222,6 +276,8 @@ const game = (function() {
     dom["clean"].addEventListener("click", () => {
         dom["slots"].forEach((slot) => {
             slot.textContent = "";
+            slot.style.backgroundColor = "white";
+            slot.style.color = "black";
         })
         gameBoard.reset();
         dom["status"].textContent = "The game begins again!";
