@@ -41,11 +41,10 @@ button#clean {
 
 #game {
     color: black;
-    background-color: white;
-    border: 2px dotted white;
+    background-color: lightgray;
+    border: 2px dotted teal;
     width: 366px;
     height: 366px;
-    padding: 3px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -64,7 +63,6 @@ button#clean {
     flex-direction: column;
     margin-top: 60px;
     padding: 5px;
-    border: 1px solid gray;
 }
 
 .colours {
@@ -84,6 +82,7 @@ button#clean {
 
 #o_score,
 #x_score {
+    font-size: 2em;
     margin-bottom: 10px;
     width: 328px;
     height: 100px;
