@@ -252,7 +252,7 @@ const game = (function() {
     dom["reset"].addEventListener("click", () => {
         dom["slots"].forEach((slot) => {
             slot.textContent = "";
-            slot.style.backgroundColor = "white";
+            slot.style.backgroundColor = "lightgray";
             slot.style.color = "black";
         })
         mech["player_o"].score = 0;
@@ -272,7 +272,7 @@ const game = (function() {
     dom["clean"].addEventListener("click", () => {
         dom["slots"].forEach((slot) => {
             slot.textContent = "";
-            slot.style.backgroundColor = "white";
+            slot.style.backgroundColor = "lightgray";
             slot.style.color = "black";
         })
         gameBoard.reset();
