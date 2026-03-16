@@ -29,7 +29,7 @@ const dom = (function() {
     const xYellow = document.querySelector("#x_yellow");
     const xOrange = document.querySelector("#x_orange");
     const oMarkers = document.querySelectorAll(".o_markers");
-    const xMarkers = document.querySelectorAll(".o_markers");
+    const xMarkers = document.querySelectorAll(".x_markers");
 
     // score divs
     const oScore = document.querySelector("#o_score");
@@ -50,8 +50,9 @@ const dom = (function() {
 
 function createPlayer(name, marker) {
     let score = 0;
+    let color = "black";
 
-    return { name, marker, score }
+    return { name, marker, score, color }
 }
 
 
@@ -67,6 +68,7 @@ const gameBoard = (function() {
             arr[arrPos] = player.marker;
             let slot = "s" + arrPos;
             dom[slot].textContent = player.marker;
+            dom[slot].style.color = player.color;
             return 0;
         } else {
             return 1;
@@ -147,44 +149,6 @@ const gameBoard = (function() {
 })();
 
 
-// TODO: Picking your colour does not work AT ALL
-const colourPicker = (function() {
-    dom["oMarkers"].forEach((color) => {
-        color.addEventListener("click", () => {
-            const file = "img/" + color.dataset.color + "_marker.png";
-            console.log(file);
-            color.classList.toggle("selected");
-
-            let elem = color.parentNode.firstChild;
-            elem = elem.nextSibling;
-            console.log(color.parentNode);
-            console.log(color);
-            console.log(elem);
-
-
-            for (let i=0;i<8;i++) {
-                if (elem.dataset.color === color.dataset.color) {
-                    continue;
-                } else {
-                    if (elem.classList.contains("selected") === true) {
-                        elem.classList.toggle("selected");
-                    }
-                }
-                // should we cycle through colors this way? if we can't hit the "next sibling" then go to first?
-                elem = elem.nextSibling;
-            }
-        }
-    )});
-
-    dom["xMarkers"].forEach((color) => {
-        color.addEventListener("click", () => {
-            const file = "img/" + color.dataset.color + "_marker.png";
-            console.log(file);
-        }
-    )});
-    
-})();
-
 const mech = (function() {
     // create players
     const player_o = createPlayer("OH", "o");
@@ -193,12 +157,12 @@ const mech = (function() {
     // function for changing turns
     function changeTurn(turn) {
         if (turn === player_o) {
-            dom["xTurn"].style.border = "2px solid green";
-            dom["oTurn"].style.border = "2px solid gray";
+            dom["xTurn"].style.border = "4px solid green";
+            dom["oTurn"].style.border = "4px solid gray";
             return player_x;
         } else {
-            dom["oTurn"].style.border = "2px solid green";
-            dom["xTurn"].style.border = "2px solid gray";
+            dom["oTurn"].style.border = "4px solid green";
+            dom["xTurn"].style.border = "4px solid gray";
             return player_o;
         }
     }
@@ -207,12 +171,12 @@ const mech = (function() {
     function rollFirst() {
         let roll = Math.floor(Math.random() * 2);
         if (roll === 0) {
-            dom["oTurn"].style.border = "2px solid green";
-            dom["xTurn"].style.border = "2px solid gray";
+            dom["oTurn"].style.border = "4px solid green";
+            dom["xTurn"].style.border = "4px solid gray";
             return player_o;
         } else {
-            dom["xTurn"].style.border = "2px solid green";
-            dom["oTurn"].style.border = "2px solid gray";
+            dom["xTurn"].style.border = "4px solid green";
+            dom["oTurn"].style.border = "4px solid gray";
             return player_x;
         }
     }
@@ -220,6 +184,34 @@ const mech = (function() {
     return { player_o, player_x, changeTurn, rollFirst }
 })();
 
+
+const colourPicker = (function() {
+    dom["oMarkers"].forEach((color) => {
+        color.addEventListener("click", () => {
+            let choice = color["id"].slice(2);
+            mech["player_o"].color = choice;
+            dom["oScore"].style.color = choice;
+            dom["slots"].forEach((slot) => {
+                if (slot.textContent === "o") {
+                    slot.style.color = choice;
+                }
+            })
+        })
+    });
+
+    dom["xMarkers"].forEach((color) => {
+        color.addEventListener("click", () => {
+            let choice = color["id"].slice(2);
+            mech["player_x"].color = choice;
+            dom["xScore"].style.color = choice;
+            dom["slots"].forEach((slot) => {
+                if (slot.textContent === "x") {
+                    slot.style.color = choice;
+                }
+            })
+        })
+    });
+})();
 
 
 const game = (function() {
@@ -266,8 +258,12 @@ const game = (function() {
         mech["player_o"].score = 0;
         mech["player_x"].score = 0;
         dom["oScore"].textContent = "o - " + mech["player_o"].score;
+        dom["oScore"].style.color = "white";
         dom["xScore"].textContent = "o - " + mech["player_x"].score;
+        dom["xScore"].style.color = "white";
         dom["status"].textContent = "Change your colour or play the game!";
+        mech["player_o"].color = "black";
+        mech["player_x"].color = "black";
         gameBoard.reset();
         count = 0;
         winner = false;
